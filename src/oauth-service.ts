@@ -46,7 +46,7 @@ export class OAuthService {
             if (!isNullOrUndefined(namespace)) {
             key = namespace + '/' + key;
         }
-        this._storage.setItem(key, JSON.stringify(data));
+        this._storage.setItem(key, data);
     }
 
     private _loadItem(key: string, namespace?: string): string | null {
@@ -120,7 +120,7 @@ export class OAuthService {
             this.http.get(this.userinfoEndpoint, { headers }).map(r => r.json()).subscribe(
                 (doc) => {
                     console.debug('userinfo received', doc);
-                    this._saveItem('id_token_claims_obj', JSON.stringify(doc), namespace);
+                    this._saveItem('id_token_claims_obj', doc, namespace);
                     resolve(doc);
                 },
                 (err) => {
